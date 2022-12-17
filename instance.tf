@@ -3,11 +3,15 @@ resource "google_compute_address" "tailscale" {
 }
 
 resource "google_compute_instance" "tailscale" {
-  name                    = "tailscale"
-  machine_type            = var.instance_type
-  metadata_startup_script = sensitive(data.template_file.startup_script.rendered)
-  desired_status          = "RUNNING"
-  tags                    = var.instance_network_tags
+  name         = "tailscale"
+  machine_type = var.instance_type
+  # metadata_startup_script = sensitive(data.template_file.startup_script.rendered)
+  metadata_startup_script = sensitive(templatefile("${path.module}/startup_script.sh.tpl", {
+    authkey  = var.tailscale_auth_key
+    hostname = var.hostname
+  }))
+  desired_status = "RUNNING"
+  tags           = var.instance_network_tags
 
   boot_disk {
     initialize_params {
@@ -35,11 +39,11 @@ resource "google_compute_instance" "tailscale" {
 
 }
 
-data "template_file" "startup_script" {
-  template = file("${path.module}/startup_script.sh.tpl")
+# data "template_file" "startup_script" {
+#   template = file("${path.module}/startup_script.sh.tpl")
 
-  vars = {
-    authkey  = var.tailscale_auth_key
-    hostname = var.hostname
-  }
-}
+#   vars = {
+#     authkey  = var.tailscale_auth_key
+#     hostname = var.hostname
+#   }
+# }
