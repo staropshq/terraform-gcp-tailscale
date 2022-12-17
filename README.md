@@ -1,2 +1,12 @@
 # terraform-gcp-tailscale
-A repository for setting up tailscale relay and exit nodes on gcp
+
+Brought to you by the folks at StarOps. 
+
+A repository for setting up a Tailscale relay and/or exit nodes on GCP.
+
+
+# Examples
+
+Exit node
+
+Relay node
