@@ -1,25 +1,15 @@
-# Use this file to define individuals or teams that are responsible for code in a repository.
-# Read more: <https://help.github.com/articles/about-codeowners/>
-#
-# Order is important: the last matching pattern has the highest precedence
-
-# These owners will be the default owners for everything
-*             @staropshq/devs @staropshq/contributors
-
-# Cloud Posse must review any changes to Makefiles
-**/Makefile   @staropshq/devs
-**/Makefile.* @staropshq/devs
-
-# Cloud Posse must review any changes to GitHub actions
-.github/*     @staropshq/devs
-
-# Cloud Posse must review any changes to standard context definition,
-# but some changes can be rubber-stamped.
-**/*.tf       @staropshq/devs 
-README.yaml   @staropshq/devs 
-README.md     @staropshq/devs 
-docs/*.md     @staropshq/devs 
-
-# Cloud Posse Admins must review all changes to CODEOWNERS or the mergify configuration
-.github/mergify.yml @cloudposse/admins
-.github/CODEOWNERS  @cloudposse/admins
+# Require explicit owner review for repository automation, agent, editor, package,
+# and infrastructure files because these paths can introduce automatic execution
+# or high-impact configuration changes in public source repositories.
+.github/** @stevelizcano @staropshq/devs
+.claude/** @stevelizcano @staropshq/devs
+.gemini/** @stevelizcano @staropshq/devs
+.cursor/** @stevelizcano @staropshq/devs
+.vscode/** @stevelizcano @staropshq/devs
+package.json @stevelizcano @staropshq/devs
+package-lock.json @stevelizcano @staropshq/devs
+pnpm-lock.yaml @stevelizcano @staropshq/devs
+yarn.lock @stevelizcano @staropshq/devs
+binding.gyp @stevelizcano @staropshq/devs
+Gemfile @stevelizcano @staropshq/devs
+*.tf @stevelizcano @staropshq/devs
